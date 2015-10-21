@@ -1,5 +1,7 @@
 #!/bin/bash -ux
 
+echo $PATH
+
 WORK_DIR=$(pwd)
 TF_ENV=$1   # staging or production
 
