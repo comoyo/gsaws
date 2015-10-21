@@ -2,8 +2,6 @@
 
 # brew install graphviz
 
-terraform graph > graph.dot
+terraform graph -draw-cycles | dot -Tpng -o graph.png
 
-dot -Tpdf -o graph.pdf graph.dot
-
-open graph.pdf
+open graph.png
