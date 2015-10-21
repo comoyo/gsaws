@@ -2,11 +2,10 @@
 
 ls -al ~/cache
 
-mkdir -p ~/cache
-
 # Install terraform
-mkdir terraform
-cd terraform
+mkdir -p ~/cache/terraform
+
+cd ~/cache/terraform
 wget https://dl.bintray.com/mitchellh/terraform/terraform_0.6.4_linux_amd64.zip
 unzip terraform_0.6.4_linux_amd64.zip
 cd ..
@@ -20,4 +19,5 @@ export PATH=~/cache/terraform:$PATH
 
 echo $PATH
 
+#~/cache/terraform/terraform version
 terraform version
