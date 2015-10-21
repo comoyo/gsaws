@@ -1,4 +1,4 @@
-#!/usr/bash -ux
+#!/bin/bash -ux
 
 pwd
 whoami
