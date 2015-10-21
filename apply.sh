@@ -12,28 +12,11 @@ terraform remote config\
   -pull=true
 
 # Start the provisioning process
-#terraform apply\
-#terraform refresh\
-terraform plan\
+terraform apply\
   -refresh=true\
-  -state=${TF_ENV}.tfstate\
+  -state=${TF_ENV}.out\
   -backup=-\
-  -detailed-exitcode\
-  -var-file=${TF_ENV}.tfvars\
   -var "aws_access_key=${AWS_ACCESS_KEY_ID}"\
   -var "aws_secret_key=${AWS_SECRET_ACCESS_KEY}"\
-  -out=.terraform/${TF_ENV}.out\
   "${WORK_DIR}"
 
-EXIT_CODE=$?
-
-if [ $EXIT_CODE == 0 ]; then
-  echo "There is nothing to change. Diff is empty."
-  exit 0
-elif [ $EXIT_CODE == 2 ]; then
-  echo "There are changes, so we should apply this changes to staging!!!"
-  exit 0
-else
-  echo "ERRRRRRROR during plan"
-  exit 1
-fi
