@@ -1,7 +1,14 @@
 #!/bin/bash -eux
 
 WORK_DIR=$(pwd)
-TF_ENV=$1
+TF_ENV=$1   # staging or production
+
+terraform remote config\
+  -backend=s3\
+  -backend-config="bucket=tf-states"\
+  -backend-config="key=$TF_ENV"\
+  -backend-config="encrypt=true"\
+  -pull=true
 
 # Start the provisioning process
 #terraform apply\
