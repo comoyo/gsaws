@@ -1,6 +1,4 @@
-#!/bin/bash -ux
-
-echo $PATH
+#!/bin/bash -u
 
 WORK_DIR=$(pwd)
 TF_ENV=$1   # staging or production
@@ -13,9 +11,6 @@ terraform remote config\
   -backend-config="encrypt=true"\
   -pull=true
 
-# Start the provisioning process
-#terraform apply\
-#terraform refresh\
 terraform plan\
   -refresh=true\
   -state=${TF_ENV}.tfstate\
