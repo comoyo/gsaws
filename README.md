@@ -18,6 +18,10 @@ Commands:
 ./plan.sh staging
 ./plan.sh production
 
+Send PR to master:
+brew install hub
+hub pull-request -m "Added pr tests" -b master
+
 ---
 
 Commit pushed => terraform plan compiled and saved to out-file to s3 (update state file on s3 for staging env) =>
