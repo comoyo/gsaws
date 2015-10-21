@@ -23,6 +23,7 @@ brew install hub
 hub pull-request -m "Added pr tests" -b master
 
 ---
+test
 
 Commit pushed => terraform plan compiled and saved to out-file to s3 (update state file on s3 for staging env) =>
 terraform apply that s3 file to stage env
