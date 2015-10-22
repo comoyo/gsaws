@@ -10,18 +10,18 @@ provider "aws" {
 
 resource "aws_key_pair" "anton-test1" {
   key_name = "anton-test1"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2aaEAAAADAQABAAABAQD3F6tyPEFEzV0LX3X8BsXdMsQz1x2cEikKDEY0aIj41qgxMCP/iteneqXSIFZBp5vizPvaoIR3Um9xK7PGoW8giupGn+EPuxIA4cDM4vzOqOkiMPhz5XK0whEjkVzTo4+S0puvDZuwIsdiW9mxhJc7tgBNL0cYlWSYVkz4G/fslNfRPW5mYAM49f4fhtxPb5ok4Q2Lg9dPKVHO/Bgeu5woMc7RY0p1ej6D4CKFE6lymSDJpW0YHX/wqE9+cfEauh7xZcG0q9t2ta6F6fmX0agvpFyZo8aFbXeUBr7osSCJNgvavWbM/06niWrOvYX2xwWdhXmXSrbX8ZbabVohBK41 email@example.com"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDT+/X/JecYcmH5JCj9oY0Hj48WOEPQlRtdpq3F2FVbqkDddNEO/WK/FuFzIzV54nykCei+BSiSgauCGEHqUVg0DS07+LZ3zHPkM06LXPnnBELdDvPH+D8a5gMkj7cCreuoZolhfPyS29ha30J8Eh+/3+oIGXTNRrMfciNew8vvsP27wER+2yrmEb/8SxashN3FuaSWI1cj7Jdz1h8NvevOzk0vUOCeb0jb8ZCJEedHj6V+DaY1MMTy2JSrO54ct5TtkSii0XfBKTVlaKnpbGsRQBxeAjAata5bjsy1yRl+W6bLEvQ4N2LSKcJN6Utt/ecSwpXKDLukzaBdHP7jV1Er email@example.com"
 }
 
 ////////////////////
-resource "aws_iam_access_key" "rundeck-executor" {
-    user = "rundeck-executor"
-}
+//resource "aws_iam_access_key" "rundeck-executor" {
+//    user = "rundeck-executor"
+//}
 
-resource "aws_iam_user" "rundeck-executor" {
-    name = "rundeck-executor"
-    path = "/"
-}
+//resource "aws_iam_user" "rundeck-executor" {
+//    name = "rundeck-executor"
+//    path = "/"
+//}
 //////////////////////
 
 //resource "aws_security_group" "default" {
