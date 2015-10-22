@@ -32,7 +32,7 @@ resource "aws_security_group" "nat" {
 resource "aws_instance" "nat" {
   ami = "${lookup(var.aws_nat_amis, var.aws_region)}"
   availability_zone = "eu-west-1a"
-  instance_type = "m1.small"
+  instance_type = "t2.small"
   key_name = "${var.aws_key_name}"
   security_groups = ["${aws_security_group.nat.id}"]
   subnet_id = "${aws_subnet.eu-west-1a-public.id}"
