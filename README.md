@@ -1,15 +1,19 @@
-# gsaws
+# Hackathon project: Global Scale AWS infrastructure as code (testable and continuously evolving)
 
-Flow:
-* Push code to github PR
-* Webhook => CI
-* CI run plan phase for staging env
-* When PR is merged into "master" => push changes to staging (terraform apply to staging own AWS account) [not sure]
+Check wiki for more details - https://github.com/comoyo/gsaws/wiki
 
+To-do:
+------
+[x] Revised Terraform knowledge
+[x] Setup CI/CD
+[x] Build/plan/update on staging AWS account
+[x] Implement basic infrastructure in Terraform
+[ ] Deploy simple nginx homepage
 
 State for each environment is saved in s3 bucket:
 -------------------------------------------------
 TF_ENV=production && terraform remote config -backend=s3 -backend-config="bucket=tf-states" -backend-config="key=$TF_ENV" -backend-config="encrypt=true" -pull=true
+
 TF_ENV=staging && terraform remote config -backend=s3 -backend-config="bucket=tf-states" -backend-config="key=$TF_ENV" -backend-config="encrypt=true" -pull=true
 
 
@@ -19,18 +23,8 @@ Commands:
 ./plan.sh staging
 ./apply.sh staging
 
-Send PR to master:
-brew install hub
+
+Helpers:
+--------
+Send PR to master (first install it - `brew install hub`):
 hub pull-request -m "Added pr tests" -b master
-
----
-
-Commit pushed => terraform plan compiled and saved to out-file to s3 (update state file on s3 for staging env) =>
-terraform apply that s3 file to stage env
-
-To-do:
-------
-[x] Revised Terraform knowledge
-[x] Setup CI/CD
-[ ] Build/plan/update on staging AWS account
-[ ] Implement basic infrastructure in Terraform
