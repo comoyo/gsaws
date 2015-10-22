@@ -78,7 +78,6 @@ resource "aws_autoscaling_group" "hello_as" {
 }
 
 resource "aws_elb" "hello-elb" {
-//  name = "hello-elb-${var.timestamp}"
   name = "hello-elb"
   subnets = ["${aws_subnet.eu-west-1a-public.id}", "${aws_subnet.eu-west-1b-public.id}"]
   security_groups = ["${aws_security_group.hello_elb_sg.id}"]
@@ -103,8 +102,5 @@ resource "aws_elb" "hello-elb" {
   lifecycle {
     create_before_destroy = true
   }
-  
-#  provisioner "local-exec" {
-#    command = "./elb-stickiness.sh ${aws_elb.hello-elb.name}"
-#  }
+
 }
