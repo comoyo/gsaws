@@ -9,6 +9,20 @@ resource "aws_security_group" "hello_instance_sg" {
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  ingress {
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_security_group" "hello_elb_sg" {
@@ -30,6 +44,8 @@ resource "aws_launch_configuration" "hello_as_conf" {
   instance_type = "t2.micro"
   key_name = "${var.aws_key_name}"
   security_groups = ["${aws_security_group.hello_instance_sg.id}"]
+  associate_public_ip_address = true
+  user_data = "${file(\"ec2_bootstrap.sh\")}"
 
   lifecycle {
     create_before_destroy = true
@@ -40,25 +56,25 @@ resource "aws_autoscaling_group" "hello_as" {
   availability_zones = ["eu-west-1a", "eu-west-1b"]
   vpc_zone_identifier = ["${aws_subnet.eu-west-1a-private.id}", "${aws_subnet.eu-west-1b-private.id}"]
   name = "hello-autoscaling-group-${var.timestamp}"
-  min_size = 1
-  max_size = 1
-  desired_capacity = 1
+  min_size = "${var.asg_min_size}"
+  max_size = "${var.asg_max_size}"
+  desired_capacity = "${var.asg_desired_capacity}"
   health_check_grace_period = 300
   health_check_type = "ELB"
   force_delete = true
   launch_configuration = "${aws_launch_configuration.hello_as_conf.id}"
   load_balancers = ["${aws_elb.hello-elb.name}"]
 
+  tag {
+    key = "Name"
+    value = "hello_web"
+    propagate_at_launch = true
+  }
+
   lifecycle {
     create_before_destroy = true
   }
-  
-//  provisioner "local-exec" {
-//    command = "./waitFor.sh http://${aws_elb.hello-elb.dns_name} 5 120"
-//  }
-//  provisioner "local-exec" {
-//    command = "./route53.sh ${aws_route53_zone.primary.zone_id} ${aws_elb.hello-elb.name}"
-//  }
+
 }
 
 resource "aws_elb" "hello-elb" {

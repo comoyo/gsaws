@@ -1,4 +1,4 @@
 aws_region = "eu-west-1"
 
-remote_user = "ubuntu"
-resources_owner = "at"
+asg_min_size = 0
+asg_max_size = 1
