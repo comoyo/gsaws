@@ -31,8 +31,8 @@ resource "aws_security_group" "hello_elb_sg" {
   vpc_id = "${aws_vpc.default.id}"
 
   ingress {
-    from_port = 80
-    to_port = 80
+    from_port = 8080
+    to_port = 8080
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -86,9 +86,9 @@ resource "aws_elb" "hello-elb" {
   cross_zone_load_balancing = true
   
   listener {
-    instance_port = 8080
+    instance_port = 80
     instance_protocol = "http"
-    lb_port = 80
+    lb_port = 8080
     lb_protocol = "http" 
   }
  
@@ -96,7 +96,7 @@ resource "aws_elb" "hello-elb" {
     healthy_threshold = 2
     unhealthy_threshold = 2
     timeout = 3
-    target = "HTTP:8080/"
+    target = "HTTP:80/"
     interval = 5
   }
  
