@@ -1,10 +1,19 @@
-//variable "key_name" {
-//    description = "Name of the SSH keypair to use in AWS."
-//}
-//
+variable "aws_key_name" {
+  description = "Name of the SSH keypair to use in AWS."
+  default = "deployer"
+}
+
 //variable "key_path" {
-//    description = "Path to the private portion of the SSH key specified."
+//  description = "Path to the private portion of the SSH key specified."
 //}
+
+variable "aws_nat_amis" {
+  description = "NAT AMI"
+  default = {
+    eu-west-1 = "ami-ef76e898"
+    ap-southeast-1 = "ami-1a9dac48"
+  }
+}
 
 variable "aws_region" {
   description = "AWS region to launch servers."
