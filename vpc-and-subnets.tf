@@ -136,35 +136,3 @@ resource "aws_subnet" "eu-west-1c-private" {
 #  subnet_id = "${aws_subnet.us-east-1d-private.id}"
 #  route_table_id = "${aws_route_table.us-east-1-private.id}"
 #}
-
-# Bastion
-#resource "aws_security_group" "bastion" {
-#  name = "bastion"
-#  description = "Allow SSH traffic from the internet"
-#
-#  ingress {
-#    from_port = 22
-#    to_port = 22
-#    protocol = "tcp"
-#    cidr_blocks = ["0.0.0.0/0"]
-#  }
-#
-#  vpc_id = "${aws_vpc.default.id}"
-#}
-
-#resource "aws_instance" "bastion" {
-#  tags {
-#    Name = "bastion"
-#  }
-#  ami = "${var.aws_ubuntu_ami}"
-#  availability_zone = "us-east-1b"
-#  instance_type = "t2.micro"
-#  key_name = "${var.aws_key_name}"
-#  security_groups = ["${aws_security_group.bastion.id}"]
-#  subnet_id = "${aws_subnet.us-east-1b-public.id}"
-#}
-#
-#resource "aws_eip" "bastion" {
-#  instance = "${aws_instance.bastion.id}"
-#  vpc = true
-#}

@@ -1,3 +1,3 @@
-//output "address" {
-//  value = "${aws_elb.web.dns_name}"
-//}
+output "elb_dns_name" {
+  value = "${aws_elb.hello-elb.dns_name}"
+}

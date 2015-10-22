@@ -1,11 +1,18 @@
+variable "aws_region" {
+  description = "AWS region to launch servers."
+  default = "eu-west-1"
+}
+
+variable "aws_access_key" { description = "the API access key" }
+variable "aws_secret_key" { description = "the API secret key" }
+
+
 variable "aws_key_name" {
   description = "Name of the SSH keypair to use in AWS."
   default = "deployer"
 }
 
-//variable "key_path" {
-//  description = "Path to the private portion of the SSH key specified."
-//}
+variable "timestamp" { }
 
 variable "aws_nat_amis" {
   description = "NAT AMI"
@@ -14,14 +21,6 @@ variable "aws_nat_amis" {
     ap-southeast-1 = "ami-1a9dac48"
   }
 }
-
-variable "aws_region" {
-  description = "AWS region to launch servers."
-  default = "eu-west-1"
-}
-
-variable "aws_access_key" { description = "the API access key" }
-variable "aws_secret_key" { description = "the API secret key" }
 
 # Ubuntu Precise 12.04 LTS (x64)
 variable "aws_amis" {
